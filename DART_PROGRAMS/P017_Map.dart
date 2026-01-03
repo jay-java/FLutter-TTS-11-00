@@ -10,7 +10,7 @@ void main(List<String> args) {
   };
   print(map);
 
-  map.containsKey(1);
+  print(map.containsKey(1));
 
   Iterable<MapEntry> entry = map.entries;
   print(entry);

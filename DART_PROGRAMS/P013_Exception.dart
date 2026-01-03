@@ -9,10 +9,10 @@ void main(List<String> args) {
     print('division = $c');
   }
   on IntegerDivisionByZeroException{
-    print('denominator should be greater than 0');
+    print('data should be greater than 0');
   }
   on FormatException{
-    print('denominator should be numeric value');
+    print('data should be numeric value');
   }
   catch(e){
     print(e);
