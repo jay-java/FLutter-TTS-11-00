@@ -4,6 +4,9 @@ import 'P001_rowCol.dart';
 import 'P002_scroll.dart';
 import 'P003_image.dart';
 import 'P004_rowcol.dart';
+import 'P005_decoration.dart';
+import 'P006_card.dart';
+import 'P007_stack.dart';
 
 void main() {
   runApp(const Mytext());
@@ -16,7 +19,7 @@ class Mytext extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MyCircular(),
+      home: MyStack(),
       // home: Scaffold(
       //   appBar: AppBar(
       //     title: Text(
