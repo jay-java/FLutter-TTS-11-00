@@ -39,7 +39,6 @@ class MyStack extends StatelessWidget {
                     color: Colors.green,
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(20),
-
                     )
                   ),
                 ),
