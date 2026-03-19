@@ -18,10 +18,7 @@ class _MyNavigationDrawerState extends State<MyNavigationDrawer> {
       ),
       body: Center(child: Text('MyApp', style: TextStyle(fontSize: 50))),
       drawer: Drawer(
-        child: Column(
-            children: [
-              drawerHeader(context),
-              drawerItems(context)]),
+        child: Column(children: [drawerHeader(context), drawerItems(context)]),
       ),
     );
   }
@@ -65,7 +62,10 @@ class _MyNavigationDrawerState extends State<MyNavigationDrawer> {
           leading: Icon(Icons.access_time),
           title: Text('Notifications'),
         ),
-        Divider(color: Colors.black54),
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Divider(color: Colors.black54),
+        ),
         ListTile(leading: Icon(Icons.settings), title: Text('Settings')),
         ListTile(leading: Icon(Icons.person), title: Text('Account')),
         ListTile(leading: Icon(Icons.logout), title: Text('Logout')),
