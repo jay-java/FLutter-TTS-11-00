@@ -1,12 +1,11 @@
 import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-import '../provider/signupService.dart';
+import '../services/signupService.dart';
 import 'loginscreen.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -102,17 +101,46 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   var email = emailController.text.trim();
                   var password = passwordController.text.trim();
 
-                  await FirebaseAuth.instance
-                      .createUserWithEmailAndPassword(
-                        email: email,
-                        password: password,
-                      )
-                      .then(
-                        (value) => {
-                          log(1),
-                          signUpUser(name, contact, email, password),
-                        },
+                  try {
+                    await FirebaseAuth.instance
+                        .createUserWithEmailAndPassword(
+                          email: email,
+                          password: password,
+                        )
+                        .then(
+                          (value) => {
+                            log(1),
+                            signUpUser(name, contact, email, password),
+                          },
+                        );
+
+                    print("Account created successfully");
+                  } on FirebaseAuthException catch (e) {
+                    if (e.code == 'email-already-in-use') {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('User already exists!')),
                       );
+                      print("User already exists. Please login instead.");
+                    } else if (e.code == 'invalid-email') {
+                      print("Invalid email format");
+                    } else if (e.code == 'weak-password') {
+                      print("Password is too weak");
+                    } else {
+                      print("Error: ${e.message}");
+                    }
+                  }
+
+                  // await FirebaseAuth.instance
+                  //     .createUserWithEmailAndPassword(
+                  //       email: email,
+                  //       password: password,
+                  //     )
+                  //     .then(
+                  //       (value) => {
+                  //         log(1),
+                  //         signUpUser(name, contact, email, password),
+                  //       },
+                  //     );
                 },
                 child: Text(
                   'SignUp',

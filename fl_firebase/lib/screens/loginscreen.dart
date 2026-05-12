@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lottie/lottie.dart';
-import '../provider/googleSignInService.dart';
+import '../services/googleSignInService.dart';
 import 'forgotpasswordScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -79,9 +79,19 @@ class _LoginScreenState extends State<LoginScreen> {
                     if (firebaseUser != null) {
                       Get.to(() => Homescreen());
                     } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Email or password is incorrect!'),
+                        ),
+                      );
                       print('email or pass is incorrect');
                     }
                   } on FirebaseAuthException catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Email or password is incorrect!'),
+                      ),
+                    );
                     print('error msg : $e');
                   }
                 },
